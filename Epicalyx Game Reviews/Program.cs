@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Epicalyx_Game_Reviews.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<Epicalyx_Game_ReviewsContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Epicalyx_Game_ReviewsContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
