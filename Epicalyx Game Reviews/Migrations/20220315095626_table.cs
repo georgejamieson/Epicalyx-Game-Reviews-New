@@ -15,7 +15,7 @@ namespace Epicalyx_Game_Reviews.Migrations
                     GameID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GameName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AgeRating = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgeRating = table.Column<string>(type: "nvarchar(3)", nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseYear = table.Column<int>(type: "int", nullable: false)
