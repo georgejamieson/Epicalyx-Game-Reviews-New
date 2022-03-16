@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Epicalyx_Game_Reviews.Data;
 using Epicalyx_Game_Reviews.Models;
 
-namespace Epicalyx_Game_Reviews.Views
+namespace Epicalyx_Game_Reviews.Controllers
 {
     public class GamesController : Controller
     {
@@ -57,13 +57,23 @@ namespace Epicalyx_Game_Reviews.Views
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GameID,GameName,AgeRating,Genre,Publisher,ReleaseYear")] Game game)
         {
-            if (ModelState.IsValid)
+            try 
             {
-                _context.Add(game);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(game);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+               
+            }
+            catch(DbUpdateException)
+            {
+                ModelState.AddModelError("pen is", "pen was");
+
             }
             return View(game);
+
         }
 
         // GET: Games/Edit/5

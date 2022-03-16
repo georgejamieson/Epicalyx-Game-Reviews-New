@@ -9,24 +9,24 @@ using Microsoft.EntityFrameworkCore;
 using Epicalyx_Game_Reviews.Data;
 using Epicalyx_Game_Reviews.Models;
 
-namespace Epicalyx_Game_Reviews.Views
+namespace Epicalyx_Game_Reviews.Controllers
 {
-    public class UsersController : Controller
+    public class FinalReviewsController : Controller
     {
         private readonly Epicalyx_Game_ReviewsContext _context;
 
-        public UsersController(Epicalyx_Game_ReviewsContext context)
+        public FinalReviewsController(Epicalyx_Game_ReviewsContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: FinalReviews
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            return View(await _context.FinalReview.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: FinalReviews/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace Epicalyx_Game_Reviews.Views
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (user == null)
+            var finalReview = await _context.FinalReview
+                .FirstOrDefaultAsync(m => m.FinalReviewID == id);
+            if (finalReview == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(finalReview);
         }
 
-        // GET: Users/Create
+        // GET: FinalReviews/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: FinalReviews/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Username,Age,ProfilePic")] User user)
+        public async Task<IActionResult> Create([Bind("FinalReviewID,Review,FinalRating,Genre,Publisher")] FinalReview finalReview)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(finalReview);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(finalReview);
         }
 
-        // GET: Users/Edit/5
+        // GET: FinalReviews/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace Epicalyx_Game_Reviews.Views
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var finalReview = await _context.FinalReview.FindAsync(id);
+            if (finalReview == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(finalReview);
         }
 
-        // POST: Users/Edit/5
+        // POST: FinalReviews/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,Username,Age,ProfilePic")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("FinalReviewID,Review,FinalRating,Genre,Publisher")] FinalReview finalReview)
         {
-            if (id != user.UserID)
+            if (id != finalReview.FinalReviewID)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace Epicalyx_Game_Reviews.Views
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(finalReview);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserID))
+                    if (!FinalReviewExists(finalReview.FinalReviewID))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace Epicalyx_Game_Reviews.Views
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(finalReview);
         }
 
-        // GET: Users/Delete/5
+        // GET: FinalReviews/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace Epicalyx_Game_Reviews.Views
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (user == null)
+            var finalReview = await _context.FinalReview
+                .FirstOrDefaultAsync(m => m.FinalReviewID == id);
+            if (finalReview == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(finalReview);
         }
 
-        // POST: Users/Delete/5
+        // POST: FinalReviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
+            var finalReview = await _context.FinalReview.FindAsync(id);
+            _context.FinalReview.Remove(finalReview);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool FinalReviewExists(int id)
         {
-            return _context.User.Any(e => e.UserID == id);
+            return _context.FinalReview.Any(e => e.FinalReviewID == id);
         }
     }
 }
