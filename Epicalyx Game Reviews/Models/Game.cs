@@ -21,7 +21,7 @@ namespace Epicalyx_Game_Reviews.Models
         public int ReleaseYear { get; set; }
 
         public ICollection<FinalReview> FinalReview { get; set; }
-        //public ICollection<AspectReview> AspectReview { get; set; }
+        public ICollection<AspectReview> AspectReview { get; set; }
 
     }
 }
