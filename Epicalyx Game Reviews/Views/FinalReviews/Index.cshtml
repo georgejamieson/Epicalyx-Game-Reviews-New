@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.FinalRating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genre)
+                @Html.DisplayNameFor(model => model.Game)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Publisher)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
@@ -37,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.FinalRating)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Genre)
+                @Html.DisplayFor(modelItem => item.Game.AgeRating)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Publisher)
+                @Html.DisplayFor(modelItem => item.User.UserID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FinalReviewID">Edit</a> |
